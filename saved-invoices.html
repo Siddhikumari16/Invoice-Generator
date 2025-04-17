@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Saved Invoices</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .invoice-list {
+      list-style: none;
+      padding: 0;
+    }
+    .invoice-item {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .invoice-item:hover {
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .invoice-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .invoice-details {
+      color: #666;
+      font-size: 0.9em;
+    }
+    .back-button {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Saved Invoices</h1>
+    <button class="back-button" onclick="window.location.href='index.html'">← Back to Invoice Generator</button>
+    <ul id="saved-invoices" class="invoice-list"></ul>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    // Function to display saved invoices
+    function displaySavedInvoices() {
+      const savedInvoices = document.getElementById('saved-invoices');
+      savedInvoices.innerHTML = '';
+      
+      const saved = JSON.parse(localStorage.getItem('invoices') || '[]');
+      
+      if (saved.length === 0) {
+        savedInvoices.innerHTML = '<p>No saved invoices found.</p>';
+        return;
+      }
+
+      saved.forEach(inv => {
+        const li = document.createElement('li');
+        li.className = 'invoice-item';
+        li.innerHTML = `
+          <div class="invoice-header">
+            <h3>Invoice #${inv.invoiceNo}</h3>
+            <span class="invoice-date">${inv.date}</span>
+          </div>
+          <div class="invoice-details">
+            <p><strong>Client:</strong> ${inv.name}</p>
+            <p><strong>Address:</strong> ${inv.address}</p>
+          </div>
+        `;
+        savedInvoices.appendChild(li);
+      });
+    }
+
+    // Display invoices when page loads
+    window.onload = displaySavedInvoices;
+  </script>
+</body>
+</html> 

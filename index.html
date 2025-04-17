@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Invoice Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Invoice Generator</h1>
+    <a href="saved-invoices.html" class="view-saved">View Saved Invoices</a>
+
+    <div class="client-info">
+      <input type="text" id="clientName" placeholder="Client Name">
+      <input type="text" id="clientAddress" placeholder="Client Address">
+      <input type="date" id="invoiceDate">
+      <input type="text" id="invoiceNumber" readonly>
+    </div>
+
+    <form id="invoice-form">
+      <table id="items-table">
+        <thead>
+          <tr>
+            <th>Item</th><th>Qty</th><th>Price</th><th>Total</th><th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="item-rows"></tbody>
+      </table>
+      <button type="button" id="add-item">Add Item</button>
+
+      <div class="totals">
+        <p>Subtotal: ₹<span id="subtotal">0.00</span></p>
+        <p>Tax (18%): ₹<span id="tax">0.00</span></p>
+        <p><strong>Total: ₹<span id="grand-total">0.00</span></strong></p>
+      </div>
+
+      <button type="button" id="download-pdf">Download PDF</button>
+      <button type="button" id="download-excel">Export to Excel</button>
+    </form>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
